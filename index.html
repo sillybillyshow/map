@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>UK Giveaway Map</title>
+
+    <!-- Montserrat font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            touch-action: manipulation;
+        }
+
+        /* HEADER */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            z-index: 20;
+            font-size: 12px;
+            line-height: 1.3em;
+            color: #222;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        #header .title {
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        #header .subtitle {
+            padding: 0 8px;
+            font-weight: 400;
+        }
+
+        #search-container {
+            position: fixed;
+            top: 55px;
+            /* below header */
+            left: 20px;
+            /* space from left */
+            right: 20px;
+            /* space from right */
+            max-width: 420px;
+            /* max width on larger screens */
+            z-index: 21;
+        }
+
+        #search {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            /* padding included inside width */
+            padding: 8px 10px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        /* MAP */
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* ADJUST NAV CONTROLS */
+        .maplibregl-ctrl-top-right {
+            top: 105px;
+            /* below header + search bar */
+            right: 10px;
+        }
+
+        /* PROGRESS BAR AT BOTTOM */
+        #progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-size: 12px;
+            z-index: 30;
+            padding: 2px 0 5px 0;
+            box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        #progress-text {
+            margin-bottom: 2px;
+        }
+
+        #progress-bar-bg {
+            width: 90%;
+            max-width: 500px;
+            height: 10px;
+            background-color: #eee;
+            margin: 0 auto;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #progress-bar-fill {
+            height: 100%;
+            background-color: #00cc44;
+            width: 0%;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header">
+        <div class="title">UK Giveaway Map</div>
+        <div class="subtitle">Follow @sillybillyshow on TikTok to get a place!</div>
+    </div>
+
+    <!-- SEARCH -->
+    <div id="search-container">
+        <input id="search" placeholder="Search place or TikTok @" />
+    </div>
+
+    <!-- MAP -->
+    <div id="map"></div>
+
+    <!-- PROGRESS BAR -->
+    <div id="progress-container">
+        <div id="progress-text">0 / 0 assigned</div>
+        <div id="progress-bar-bg">
+            <div id="progress-bar-fill"></div>
+        </div>
+    </div>
+
+    <script src="map.js"></script>
+</body>
+
+</html>
